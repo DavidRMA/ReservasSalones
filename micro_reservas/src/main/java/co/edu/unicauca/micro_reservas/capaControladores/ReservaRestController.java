@@ -46,12 +46,10 @@ public class ReservaRestController {
     }
 
     @PutMapping("/reservas/{id}")
-    public ReservaDTORespuesta actualizarReserva(@PathVariable Integer id, @RequestBody ReservaDTOPeticion reserva) {
+    public ReservaDTORespuesta actualizarReserva(@RequestBody ReservaDTOPeticion reserva, @PathVariable Integer id) {
         ReservaDTORespuesta objReserva = null;
-        ReservaDTORespuesta reservaActual = reservaService.findById(id);
-        System.out.println("eco en el actualizar del rest");
-        System.out.println(reservaActual);
-        if(reservaActual == null) {
+        ReservaDTORespuesta reservaActual = reservaService.findById(id);        
+        if(reservaActual != null) {
             objReserva = reservaService.update(id, reserva);
         }
         return objReserva;
