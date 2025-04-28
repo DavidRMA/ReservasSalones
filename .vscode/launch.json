@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MicroReservasApplication<micro_reservas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "co.edu.unicauca.micro_reservas.MicroReservasApplication",
+            "projectName": "micro_reservas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
