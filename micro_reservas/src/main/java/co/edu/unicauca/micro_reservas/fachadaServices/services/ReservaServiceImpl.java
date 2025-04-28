@@ -52,7 +52,7 @@ public class ReservaServiceImpl implements IReservaService{
     @Override
     public ReservaDTORespuesta save(ReservaDTOPeticion reserva){
         ReservaEntity reservaEntity = this.modelMapper.map(reserva, ReservaEntity.class);
-        reservaEntity.setEstadoReserva("Pendiente");
+        //reservaEntity.setEstadoReserva("Pendiente");
         ReservaEntity objReservaEntity = this.servicioAccesoBaseDatos.save(reservaEntity);
         System.out.println(objReservaEntity);
         ReservaDTORespuesta reservaDTO = this.modelMapper.map(objReservaEntity, ReservaDTORespuesta.class);
@@ -73,9 +73,6 @@ public class ReservaServiceImpl implements IReservaService{
             objReservaNueva.setHoraFin(reserva.getHoraFin());
             objReservaNueva.setEstadoReserva(reserva.getEstadoReserva());
             objReservaNueva.getObjSalon().setId(reserva.getObjSalon().getId());
-            objReservaNueva.getObjSalon().setNombreSalon(reserva.getObjSalon().getNombreSalon());
-            objReservaNueva.getObjSalon().setUbicacion(reserva.getObjSalon().getUbicacion());
-
             Optional<ReservaEntity> reservaOp = this.servicioAccesoBaseDatos.update(id, objReservaNueva);
             reservaActualizado = reservaOp.get();
         }

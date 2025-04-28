@@ -2,8 +2,6 @@
 package co.edu.unicauca.micro_reservas.fachadaServices.DTO;
 
 import java.sql.Date;
-
-import co.edu.unicauca.micro_reservas.capaAccesoADatos.models.SalonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +18,5 @@ public class ReservaDTORespuesta {
     private String horaInicio;
     private String horaFin;
     private String estadoReserva;
-    private SalonEntity objSalon; // Relación con el salón
-
+    private SalonDTORespuesta objSalon; // Relación con el salón
 }

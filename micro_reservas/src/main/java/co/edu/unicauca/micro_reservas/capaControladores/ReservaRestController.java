@@ -49,6 +49,8 @@ public class ReservaRestController {
     public ReservaDTORespuesta actualizarReserva(@PathVariable Integer id, @RequestBody ReservaDTOPeticion reserva) {
         ReservaDTORespuesta objReserva = null;
         ReservaDTORespuesta reservaActual = reservaService.findById(id);
+        System.out.println("eco en el actualizar del rest");
+        System.out.println(reservaActual);
         if(reservaActual == null) {
             objReserva = reservaService.update(id, reserva);
         }

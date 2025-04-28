@@ -40,7 +40,7 @@ public class ReservaRepositoryBaseDeDatos {
             sentencia.setDate(4, objReserva.getFechaReserva());
             sentencia.setString(5, objReserva.getHoraInicio());
             sentencia.setString(6, objReserva.getHoraFin());
-            sentencia.setString(7, objReserva.getEstadoReserva());
+            sentencia.setString(7, "Pendiente");
             sentencia.setInt(8, objReserva.getObjSalon().getId());
             resultado = sentencia.executeUpdate();
 
