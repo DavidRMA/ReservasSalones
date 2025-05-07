@@ -1,0 +1,13 @@
+header {
+    background-color: #000066; /* Light gray background */
+    padding: 0; /* Padding around the header */
+    margin: 0;
+    width: 100%;
+    margin-top: 10px;
+}
+
+h1 {
+    font-size: 2.5em; /* Font size for the header text */
+    margin-top: 35px; /* No margin around the header text */
+    color: white; /* White text color */
+}

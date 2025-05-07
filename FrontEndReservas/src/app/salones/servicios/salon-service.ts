@@ -9,7 +9,7 @@ import { Salon } from "../modelos/salon";
   })
 export class SalonService {
     private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    private urlEndPoint: string = 'http://localhost:5000/api/salones/';
+    private urlEndPoint: string = 'http://localhost:5000/api/salones';
 
     constructor(private http: HttpClient) { }
     getSalones(): Observable<Salon[]> {

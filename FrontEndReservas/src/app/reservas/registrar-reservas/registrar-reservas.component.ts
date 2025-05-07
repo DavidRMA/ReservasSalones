@@ -19,7 +19,7 @@ import {HttpClientModule } from '@angular/common/http';
 export class RegistrarReservasComponent {
   public reserva: Reserva = new Reserva();
   public salones: Salon[] = [];
-  public titulo: string = "Registrar Reserva";
+  public titulo: string = "Realiza tu reserva ahora!";
 
   constructor(private salonService: SalonService, private reservaService: ReservaService, private router: Router) { }
   

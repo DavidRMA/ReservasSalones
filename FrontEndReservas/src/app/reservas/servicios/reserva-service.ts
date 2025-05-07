@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 })
 export class ReservaService {
     private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-    private urlEndPoint: string = 'http://localhost:5000/api/reservas/';
+    private urlEndPoint: string = 'http://localhost:5000/api/reservas';
 
     constructor(private http: HttpClient) { }
     getReservas(): Observable<Reserva[]> {

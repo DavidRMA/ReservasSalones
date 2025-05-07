@@ -1,54 +1,56 @@
-<div class="card bg-dark text-white">
-    <div class="card-header">{{titulo}}</div>
+<div class="card">
+    <div class="card-header" style="background-color: white; font-size: 30px; font-weight: bold">{{titulo}}</div>
     <div class="card-body">
         <form>
             <div class="form-group row">
-                <label for="nombres" class="col-form-label col-sm-2">Nombres</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="nombres" class="col-form-label col-sm-4">Nombres:</label>
+                <div class="col-sm-8 mb-2 input-group-lg">
                     <input type="text" class="form-control" [(ngModel)]="reserva.nombres" name="nombres">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="apellidos" class="col-form-label col-sm-2">Apellidos</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="apellidos" class="col-form-label col-sm-4">Apellidos:</label>
+                <div class="col-sm-8 mb-2 input-group-lg">
                     <input type="text" class="form-control" [(ngModel)]="reserva.apellidos" name="apellidos">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="cantidadPersonas" class="col-form-label col-sm-2">Cantidad personas</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="cantidadPersonas" class="col-form-label col-sm-4">Cantidad personas:</label>
+                <div class="col-sm-2 mb-2 input-group-lg">
                     <input type="number" class="form-control" [(ngModel)]="reserva.cantidadPersonas" name="cantidadPersonas" min="1" max="100" value="3">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="salon" class="col-form-label col-sm-2">Salón</label>
-                <select id="salon" class="form-select">
-                    <option *ngFor="let salon of salones" [value]="salon.nombreSalon">{{salon.ubicacion}}</option>
-                </select> 
+                <label for="salon" class="col-form-label col-sm-4">Salón:</label>
+                <div class="col-sm-4 mb-2 input-group-lg">
+                    <select id="salon" class="form-select" [(ngModel)]="reserva.objSalon" name="salon">
+                        <option *ngFor="let salon of salones" [ngValue]="salon">{{salon.nombreSalon}} de {{ salon.ubicacion }}</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group row">
-                <label for="fechaReserva" class="col-form-label col-sm-2">Fecha de uso</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="fechaReserva" class="col-form-label col-sm-4">Fecha de uso:</label>
+                <div class="col-sm-3 mb-2 input-group-lg">
                     <input type="date" class="form-control" [(ngModel)]="reserva.fechaReserva" name="fechaReserva">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="horaInicio" class="col-form-label col-sm-2">Hora inicio</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="horaInicio" class="col-form-label col-sm-4">Hora inicio:</label>
+                <div class="col-sm-3 mb-2 input-group-lg">
                     <input type="time" class="form-control" [(ngModel)]="reserva.horaInicio" name="horaInicio">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="horaFin" class="col-form-label col-sm-2">Hora fin</label>
-                <div class="col-sm-6 mb-2 input-group-lg">
+                <label for="horaFin" class="col-form-label col-sm-4">Hora fin:</label>
+                <div class="col-sm-3 mb-2 input-group-lg">
                     <input type="time" class="form-control" [(ngModel)]="reserva.horaFin" name="horaFin">
                 </div>
             </div>
         </form>
     </div>
-    <div class="form-group row">
-        <div class="col-sm-6">
-            <button class="btn btn-primary" role="button" (click)='registrarReserva()'>Registrar reserva</button>
+    <div class="form-group row" style="text-align: end;">
+        <div class="col-sm-8">
+            <button class="btn btn-primary" style="background-color: #000066; color: white" role="button" (click)='registrarReserva()'>Registrar reserva</button>
         </div>
     </div>
 </div>
