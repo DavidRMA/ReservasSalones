@@ -16,4 +16,8 @@ public interface IReservaService {
     public ReservaDTORespuesta update(Integer id, ReservaDTOPeticion reserva);
 
     public Boolean delete(Integer id);
+
+    public ReservaDTORespuesta confirmarReserva(Integer id);
+
+    public ReservaDTORespuesta cancelarReserva(Integer id);
 }

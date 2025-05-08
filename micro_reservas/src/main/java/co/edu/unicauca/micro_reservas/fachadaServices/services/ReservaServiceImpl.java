@@ -83,4 +83,30 @@ public class ReservaServiceImpl implements IReservaService{
     public Boolean delete(Integer id){
         return this.servicioAccesoBaseDatos.delete(id);
     }
+
+    @Override
+    public ReservaDTORespuesta confirmarReserva(Integer id){
+        ReservaEntity reservaConfirmada = null;
+        Optional<ReservaEntity> reservaEntityOpt = this.servicioAccesoBaseDatos.findById(id);
+        if(reservaEntityOpt.isPresent()){
+            ReservaEntity objReservaNueva = reservaEntityOpt.get();
+            objReservaNueva.setEstadoReserva("Confirmada");
+            Optional<ReservaEntity> reservaOp = this.servicioAccesoBaseDatos.update(id, objReservaNueva);
+            reservaConfirmada = reservaOp.get();
+        }
+        return this.modelMapper.map(reservaConfirmada, ReservaDTORespuesta.class);
+    }
+
+    @Override
+    public ReservaDTORespuesta cancelarReserva(Integer id){
+        ReservaEntity reservaRechazada = null;
+        Optional<ReservaEntity> reservaEntityOpt = this.servicioAccesoBaseDatos.findById(id);
+        if(reservaEntityOpt.isPresent()){
+            ReservaEntity objReservaNueva = reservaEntityOpt.get();
+            objReservaNueva.setEstadoReserva("Rechazada");
+            Optional<ReservaEntity> reservaOp = this.servicioAccesoBaseDatos.update(id, objReservaNueva);
+            reservaRechazada = reservaOp.get();
+        }
+        return this.modelMapper.map(reservaRechazada, ReservaDTORespuesta.class);
+    }
 }

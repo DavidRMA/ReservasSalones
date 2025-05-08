@@ -2,6 +2,8 @@
 package co.edu.unicauca.micro_reservas.fachadaServices.DTO;
 
 import java.sql.Date;
+import java.time.LocalTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +17,8 @@ public class ReservaDTORespuesta {
     private String apellidos;
     private int cantidadPersonas;
     private Date fechaReserva;
-    private String horaInicio;
-    private String horaFin;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private String estadoReserva;
     private SalonDTORespuesta objSalon; // Relación con el salón
 }

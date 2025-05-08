@@ -64,4 +64,24 @@ public class ReservaRestController {
         }
         return band;
     }
+
+    @PutMapping("/reservas/confirmar/{id}")
+    public ReservaDTORespuesta confirmarReserva(@PathVariable Integer id) {
+        ReservaDTORespuesta objReserva = null;
+        ReservaDTORespuesta reservaActual = reservaService.findById(id);
+        if(reservaActual != null) {
+            objReserva = reservaService.confirmarReserva(id);
+        }
+        return objReserva;
+    }
+
+    @PutMapping("/reservas/cancelar/{id}")
+    public ReservaDTORespuesta cancelarReserva(@PathVariable Integer id) {
+        ReservaDTORespuesta objReserva = null;
+        ReservaDTORespuesta reservaActual = reservaService.findById(id);
+        if(reservaActual != null) {
+            objReserva = reservaService.cancelarReserva(id);
+        }
+        return objReserva;
+    }
 }

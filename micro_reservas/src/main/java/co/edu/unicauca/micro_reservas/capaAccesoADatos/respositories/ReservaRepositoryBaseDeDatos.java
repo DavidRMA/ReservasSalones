@@ -1,10 +1,10 @@
 package co.edu.unicauca.micro_reservas.capaAccesoADatos.respositories;
 
-import java.lang.Thread.State;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
@@ -38,8 +38,8 @@ public class ReservaRepositoryBaseDeDatos {
             sentencia.setString(2, objReserva.getApellidos());
             sentencia.setInt(3, objReserva.getCantidadPersonas());
             sentencia.setDate(4, objReserva.getFechaReserva());
-            sentencia.setString(5, objReserva.getHoraInicio());
-            sentencia.setString(6, objReserva.getHoraFin());
+            sentencia.setTime(5, Time.valueOf(objReserva.getHoraInicio()));
+            sentencia.setTime(6, Time.valueOf(objReserva.getHoraFin()));
             sentencia.setString(7, "Pendiente");
             sentencia.setInt(8, objReserva.getObjSalon().getId());
             resultado = sentencia.executeUpdate();
@@ -81,8 +81,8 @@ public class ReservaRepositoryBaseDeDatos {
                 objReserva.setApellidos(resultado.getString("apellidos"));
                 objReserva.setCantidadPersonas(resultado.getInt("cantidadPersonas"));
                 objReserva.setFechaReserva(resultado.getDate("fechaReserva"));
-                objReserva.setHoraInicio(resultado.getString("horaInicio"));
-                objReserva.setHoraFin(resultado.getString("horaFin"));
+                objReserva.setHoraInicio(resultado.getTime("horaInicio").toLocalTime());
+                objReserva.setHoraFin(resultado.getTime("horaFin").toLocalTime());
                 objReserva.setEstadoReserva(resultado.getString("estadoReserva"));
                 objReserva.setObjSalon(new SalonEntity(resultado.getInt("idSalon"), resultado.getString("nombreSalon"), resultado.getString("ubicacion")));
                 reservas.add(objReserva);
@@ -114,8 +114,8 @@ public class ReservaRepositoryBaseDeDatos {
                 objReserva.setApellidos(resultado.getString("apellidos"));
                 objReserva.setCantidadPersonas(resultado.getInt("cantidadPersonas"));
                 objReserva.setFechaReserva(resultado.getDate("fechaReserva"));
-                objReserva.setHoraInicio(resultado.getString("horaInicio"));
-                objReserva.setHoraFin(resultado.getString("horaFin"));
+                objReserva.setHoraInicio(resultado.getTime("horaInicio").toLocalTime());
+                objReserva.setHoraFin(resultado.getTime("horaFin").toLocalTime());
                 objReserva.setEstadoReserva(resultado.getString("estadoReserva"));
                 objReserva.setObjSalon(new SalonEntity(resultado.getInt("idSalon"), resultado.getString("nombreSalon"), resultado.getString("ubicacion")));
             }
@@ -141,8 +141,8 @@ public class ReservaRepositoryBaseDeDatos {
             sentencia.setString(2, objReserva.getApellidos());
             sentencia.setInt(3, objReserva.getCantidadPersonas());
             sentencia.setDate(4, objReserva.getFechaReserva());
-            sentencia.setString(5, objReserva.getHoraInicio());
-            sentencia.setString(6, objReserva.getHoraFin());
+            sentencia.setTime(5, Time.valueOf(objReserva.getHoraInicio()));
+            sentencia.setTime(6, Time.valueOf(objReserva.getHoraFin()));
             sentencia.setString(7, objReserva.getEstadoReserva());
             sentencia.setInt(8, objReserva.getObjSalon().getId());
             sentencia.setInt(9, idReserva);
