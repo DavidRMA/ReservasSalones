@@ -11,3 +11,12 @@ h1 {
     margin-top: 35px; /* No margin around the header text */
     color: white; /* White text color */
 }
+
+i {
+    padding-top: 30px;
+    color: white;
+}
+
+p {
+    color: white;
+}

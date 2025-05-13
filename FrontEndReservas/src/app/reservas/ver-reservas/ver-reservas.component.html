@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h5>Detalles de la Reserva</h5>
+    </div>
+    <div class="card-body">
+      <!-- Detalles de la reserva en el formato solicitado -->
+      <p>
+        La reserva ha sido realizada a nombre de 
+        <strong>{{ reserva.nombres }} {{ reserva.apellidos }}</strong>. 
+        Se ha asignado el salón correspondiente, 
+        <strong>{{ reserva.objSalon?.nombreSalon }}</strong>
+        de la <strong>{{reserva.objSalon?.ubicacion}}</strong>, 
+        programado para el <strong>{{ reserva.fechaReserva | date: 'dd/MMM/yyyy' }}</strong>, 
+        con una duración desde <strong>{{ reserva.horaInicio }}</strong> 
+        hasta <strong>{{ reserva.horaFin }}</strong>. 
+        La cantidad de personas previstas para la reserva es 
+        <strong>{{ reserva.cantidadPersonas }}</strong>, 
+        y el estado actual de la reserva es 
+        <strong>{{ reserva.estadoReserva }}</strong>.
+      </p>
+    </div>
+    <div class="card-footer text-end">
+      <button class="btn btn-primary" style="background-color: #000066; color: white" (click)="irListarReservas()">Volver</button>
+    </div>
+  </div>
+</div>

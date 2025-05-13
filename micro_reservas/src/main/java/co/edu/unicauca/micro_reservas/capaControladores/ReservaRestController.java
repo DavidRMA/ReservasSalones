@@ -41,6 +41,10 @@ public class ReservaRestController {
     @PostMapping("/reservas")
     public ReservaDTORespuesta crearReserva(@RequestBody ReservaDTOPeticion reserva) {
         ReservaDTORespuesta objReserva = null;
+        //verificamos si el salon esta disponible
+        if(verificarDisponibilidad(reserva)==false){
+            return objReserva; //retornamos null
+        }
         objReserva = reservaService.save(reserva);
         return objReserva;
     }
@@ -83,5 +87,11 @@ public class ReservaRestController {
             objReserva = reservaService.cancelarReserva(id);
         }
         return objReserva;
+    }
+
+    @PostMapping("/reservas/verificar-disponibilidad")
+    public Boolean verificarDisponibilidad(@RequestBody ReservaDTOPeticion reserva) {
+        boolean disponible = reservaService.verificarDisponibilidad(reserva);
+        return disponible;
     }
 }

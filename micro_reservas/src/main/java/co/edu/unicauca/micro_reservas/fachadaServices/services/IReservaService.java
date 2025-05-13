@@ -20,4 +20,6 @@ public interface IReservaService {
     public ReservaDTORespuesta confirmarReserva(Integer id);
 
     public ReservaDTORespuesta cancelarReserva(Integer id);
+
+    public Boolean verificarDisponibilidad(ReservaDTOPeticion reserva); 
 }

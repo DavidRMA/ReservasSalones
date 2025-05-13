@@ -1,6 +1,12 @@
 package co.edu.unicauca.micro_reservas.fachadaServices.services;
 
+
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,4 +115,41 @@ public class ReservaServiceImpl implements IReservaService{
         }
         return this.modelMapper.map(reservaRechazada, ReservaDTORespuesta.class);
     }
+
+    @Override
+    public Boolean verificarDisponibilidad(ReservaDTOPeticion reserva) {
+        // Datos de la nueva reserva
+        LocalTime horaInicioNueva = reserva.getHoraInicio();
+        LocalTime horaFinNueva = reserva.getHoraFin();
+        Date fechaReservaNueva = reserva.getFechaReserva();
+        fechaReservaNueva = new Date(fechaReservaNueva.getTime() + (24 * 60 * 60 * 1000));
+        Integer idSalonNuevo = reserva.getObjSalon().getId();
+
+        // Imprimir la fecha recibida para ver si llega correctamente
+        System.out.println("Fecha recibida en el método: " + fechaReservaNueva);
+        // Consultar reservas con el mismo salón y fecha
+        List<ReservaEntity> reservasEntityList = this.servicioAccesoBaseDatos.findBySalonIdAndFechaReserva(idSalonNuevo, fechaReservaNueva);
+
+
+        if (!reservasEntityList.isEmpty()) {
+            for (ReservaEntity reservaExistente : reservasEntityList) {
+                // Imprimir la fecha de la reserva existente para verificar coincidencia
+                System.out.println("Fecha de reserva existente: " + reservaExistente.getFechaReserva());
+
+                // Convertir las horas de la reserva existente
+                LocalTime horaInicioExistente = reservaExistente.getHoraInicio();
+                LocalTime horaFinExistente = reservaExistente.getHoraFin();
+
+                // Verificar solapamiento de horarios
+                if (horaInicioNueva.isBefore(horaFinExistente) && horaFinNueva.isAfter(horaInicioExistente)) {
+                    System.out.println("Reserva conflictiva encontrada con ID: " + reservaExistente.getId() + "\nSalon ocupado.");
+                    return false; // El salón está ocupado
+                }
+            }
+        }
+        System.out.println("El salón está disponible para la reserva.");
+        return true; // El salón está disponible
+}
+
+
 }

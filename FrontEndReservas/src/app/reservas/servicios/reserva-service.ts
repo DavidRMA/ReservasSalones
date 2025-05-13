@@ -27,21 +27,35 @@ export class ReservaService {
 
     update(reserva: Reserva): Observable<Reserva> {
         console.log("Actualizando reserva desde el servicio", reserva);
-        return this.http.put<Reserva>(`${this.urlEndPoint}${reserva.id}`, reserva, { headers: this.httpHeaders}).pipe(
+        return this.http.put<Reserva>(`${this.urlEndPoint}/${reserva.id}`, reserva, { headers: this.httpHeaders}).pipe(
             catchError(this.handleError)
         );
     }
 
     deleteReserva(id: number): Observable<void> {
         console.log("Eliminando reserva desde el servicio");
-        return this.http.delete<void>(`${this.urlEndPoint}${id}`, { headers: this.httpHeaders}).pipe(
+        return this.http.delete<void>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders}).pipe(
             catchError(this.handleError)
         );
     }
 
     getReservaById(id: number): Observable<Reserva> {
         console.log("Obteniendo reserva por ID desde el servicio", id);
-        return this.http.get<Reserva>(`${this.urlEndPoint}${id}`);
+        return this.http.get<Reserva>(`${this.urlEndPoint}/${id}`);
+    }
+
+    confirmarReserva(id: number): Observable<Reserva> {
+        console.log("Confirmando reserva desde el servicio", id);
+        return this.http.put<Reserva>(`${this.urlEndPoint}/confirmar/${id}`, { headers: this.httpHeaders}).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    cancelarReserva(id: number): Observable<Reserva> {
+        console.log("Cancelando reserva desde el servicio", id);
+        return this.http.put<Reserva>(`${this.urlEndPoint}/cancelar/${id}`, { headers: this.httpHeaders}).pipe(
+            catchError(this.handleError)
+        );
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -65,5 +79,9 @@ export class ReservaService {
         }else{
             return throwError(() => new Error('Ocurrió un error indeperado :('));
         }
+    }
+
+    verificarDisponibilidad(reserva: Reserva): Observable<boolean> {
+        return this.http.post<boolean>(`${this.urlEndPoint}/verificar-disponibilidad`, reserva);
     }
 }

@@ -5,8 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -178,6 +182,41 @@ public class ReservaRepositoryBaseDeDatos {
             System.out.println("Eliminacion exitosa!");
         }
         return resultado == 1;
+    }
+
+    /* Método para listar reservas de un salón específico y una fecha específica */
+    public List<ReservaEntity> findBySalonIdAndFechaReserva(Integer idSalon, Date fechaReserva){
+        System.out.println("Buscando reservas para el salón y la fecha especificada en la base de datos");
+        System.out.println(idSalon);
+        System.out.println(fechaReserva);
+        List<ReservaEntity> reservas = new ArrayList<>();
+        conexionABaseDeDatos.conectar();
+        try{
+            PreparedStatement sentencia = null;
+            String consulta = "SELECT * FROM Reserva Join Salon On Reserva.idSalon = Salon.id WHERE Reserva.idSalon = ? AND Reserva.fechaReserva = ?";
+            sentencia = conexionABaseDeDatos.getConexion().prepareStatement(consulta);
+            sentencia.setInt(1, idSalon);
+            sentencia.setDate(2, fechaReserva);
+            ResultSet resultado = sentencia.executeQuery();
+            while(resultado.next()){
+                ReservaEntity objReserva = new ReservaEntity();
+                objReserva.setId(resultado.getInt("id"));
+                objReserva.setNombres(resultado.getString("nombres"));
+                objReserva.setApellidos(resultado.getString("apellidos"));
+                objReserva.setCantidadPersonas(resultado.getInt("cantidadPersonas"));
+                objReserva.setFechaReserva(resultado.getDate("fechaReserva"));
+                objReserva.setHoraInicio(resultado.getTime("horaInicio").toLocalTime());
+                objReserva.setHoraFin(resultado.getTime("horaFin").toLocalTime());
+                objReserva.setEstadoReserva(resultado.getString("estadoReserva"));
+                objReserva.setObjSalon(new SalonEntity(resultado.getInt("idSalon"), resultado.getString("nombreSalon"), resultado.getString("ubicacion")));
+                reservas.add(objReserva);
+            }
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+        }catch(SQLException e){
+            System.out.println("Error en la consulta: " + e.getMessage());
+        }
+        return reservas;
     }
 }
 

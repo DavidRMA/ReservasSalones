@@ -17,6 +17,6 @@ export class LocalTime {
     }
 
     toString(): string {
-        return `${this.horas.toString().padStart(2, '0')}:${this.minutos.toString().padStart(2, '0')}:${this.segundos.toString().padStart(2, '0')}`;
+        return `${this.horas.toString().padStart(2, '0')}:${this.minutos.toString().padStart(2, '0')}`;
     }
 }
